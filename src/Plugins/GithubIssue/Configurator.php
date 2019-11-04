@@ -8,7 +8,7 @@ use s9e\TextFormatter\Plugins\ConfiguratorBase;
 
 class Configurator extends ConfiguratorBase
 {
-    protected $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+)\/(issues|pull)\/(\d+)(#issuecomment-\d+)?|([\w-]+[\/\w-]+)#(\d+))/si';
+    protected $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+)\/(issues|pull)\/(\d+)(#issuecomment-\d+)?|([\w-]+\/[\w-]+)#(\d+))/si';
     protected $tagName = 'GITHUBISSUE';
 
     protected function setUp()
