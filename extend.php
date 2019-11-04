@@ -3,9 +3,9 @@
 /*
  * This file is part of fof/github-autolink.
  *
- * Copyright (c) 2019 David Sevilla Martin.
+ * Copyright (c) 2019 FriendsOfFlarum.
  *
- * For the full copyright and license information, please view the LICENSE.md
+ * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
@@ -19,7 +19,7 @@ return [
         ->css(__DIR__.'/less/forum.less'),
     (new Extend\Formatter())
         ->configure(function (Configurator $configurator) {
-             $configurator->plugins->set('GithubIssueAutolink', Plugins\GithubIssue\Configurator::class);
-             $configurator->plugins->set('GithubCommitAutolink', Plugins\GithubCommit\Configurator::class);
-        })
+            $configurator->plugins->set('GithubIssueAutolink', Plugins\GithubIssue\Configurator::class);
+            $configurator->plugins->set('GithubCommitAutolink', Plugins\GithubCommit\Configurator::class);
+        }),
 ];
