@@ -26,7 +26,7 @@ composer update fof/github-autolink
 [<img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" height="25" />](https://patreon.com/datitisev)
 
 - [Packagist](https://packagist.org/packages/fof/github-autolink)
-- [GitHub](https://github.com/packages/FriendsOfFlarum/follow-tags)
+- [GitHub](https://github.com/packages/FriendsOfFlarum/github-autolink)
 - [Original by Sijad](https://packagist.org/packages/sijad/flarum-ext-github-autolink)
 
 An extension by [FriendsOfFlarum](https://github.com/FriendsOfFlarum).
