@@ -15,7 +15,7 @@ use s9e\TextFormatter\Plugins\ConfiguratorBase;
 
 class Configurator extends ConfiguratorBase
 {
-    protected $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+)\/commit\/([0-9a-f]{7,40})(#commitcomment-\d+)?|([\w-]+\/[\w-]+)@([0-9a-f]{7,40}))/si';
+    protected $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+)\/commit\/([0-9a-f]{7,40})(#commitcomment-\w+)?(#diff-[\w-]+)?|([\w-]+\/[\w-]+)@([0-9a-f]{7,40}))/si';
     protected $tagName = 'GITHUBCOMMIT';
 
     protected function setUp()
@@ -29,6 +29,7 @@ class Configurator extends ConfiguratorBase
         $tag->attributes->add('repo');
         $tag->attributes->add('commit');
         $tag->attributes->add('comment');
+        $tag->attributes->add('diff');
 
         $tag->template = '<a class="github-commit-link">
             <xsl:attribute name="href">'.
@@ -36,6 +37,7 @@ class Configurator extends ConfiguratorBase
             '</xsl:attribute>
             <xsl:value-of select="@repo"/>@<code><xsl:value-of select="substring(@commit, 1, 7)"/></code>
             <xsl:if test="string(@comment)"> (comment)</xsl:if>
+            <xsl:if test="string(@diff)"> (diff)</xsl:if>
         </a>';
     }
 

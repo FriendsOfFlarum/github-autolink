@@ -29,9 +29,10 @@ class Parser extends ParserBase
 
             $tag->setAttributes(
                 [
-                    'repo'    => $m[1][1] >= 0 ? $m[1][0] : $m[4][0],
-                    'commit'  => $m[2][1] >= 0 ? $m[2][0] : $m[5][0],
+                    'repo'    => $m[1][1] >= 0 ? $m[1][0] : $m[5][0],
+                    'commit'  => $m[2][1] >= 0 ? $m[2][0] : $m[6][0],
                     'comment' => isset($m[3][0]) ? $m[3][0] : '',
+                    'diff' => isset($m[4][0]) ? $m[4][0] : '',
                 ]
             );
         }
