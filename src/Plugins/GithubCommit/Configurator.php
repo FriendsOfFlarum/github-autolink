@@ -33,11 +33,11 @@ class Configurator extends ConfiguratorBase
 
         $tag->template = '<a class="github-commit-link">
             <xsl:attribute name="href">'.
-                'https://github.com/<xsl:value-of select="@repo"/>/commit/<xsl:value-of select="@commit"/><xsl:value-of select="@comment"/>'.
+                'https://github.com/<xsl:value-of select="@repo"/>/commit/<xsl:value-of select="@commit"/><xsl:value-of select="@comment"/><xsl:value-of select="@diff"/>'.
             '</xsl:attribute>
             <xsl:value-of select="@repo"/>@<code><xsl:value-of select="substring(@commit, 1, 7)"/></code>
-            <xsl:if test="string(@comment)"> (comment)</xsl:if>
-            <xsl:if test="string(@diff)"> (diff)</xsl:if>
+            <xsl:if test="string(@comment) and @comment != \'\'"> (comment)</xsl:if>
+            <xsl:if test="string(@diff) and @diff != \'\'"> (diff)</xsl:if>
         </a>';
     }
 

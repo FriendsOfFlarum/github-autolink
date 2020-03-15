@@ -35,7 +35,8 @@ class Configurator extends ConfiguratorBase
             <xsl:attribute name="href">'.
                 'https://github.com/<xsl:value-of select="@repo"/>/<xsl:value-of select="@type"/>/<xsl:value-of select="@issue"/><xsl:value-of select="@comment"/>'.
             '</xsl:attribute>
-            <xsl:value-of select="@repo"/>#<xsl:value-of select="@issue"/><xsl:if test="string(@comment)"> (comment)</xsl:if>
+            <xsl:value-of select="@repo"/>#<xsl:value-of select="@issue"/>
+            <xsl:if test="string(@comment) and @comment != \'\'"> (comment)</xsl:if>
         </a>';
     }
 
