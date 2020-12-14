@@ -1,45 +1,62 @@
 {
-  "name": "fof/github-autolink",
-  "description": "Autolink GitHub issues and commits in posts",
-  "keywords": [
-    "flarum", "github", "autolink", "issue", "commit"
-  ],
-  "type": "flarum-extension",
-  "license": "MIT",
-  "require": {
-    "flarum/core": "^0.1.0-beta.14"
-  },
-  "replace": {
-    "sijad/flarum-ext-github-autolink": "*"
-  },
-  "authors": [
-    {
-      "name": "Sajjad Hashemian",
-      "email": "wolaws@gmail.com",
-      "role": "Developer (Original)"
+    "name": "fof/github-autolink",
+    "description": "Autolink GitHub issues and commits in posts",
+    "keywords": [
+        "flarum",
+        "github",
+        "autolink",
+        "issue",
+        "commit"
+    ],
+    "type": "flarum-extension",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/FriendsOfFlarum/github-autolink/issues",
+        "source": "https://github.com/FriendsOfFlarum/github-autolink",
+        "forum": "https://discuss.flarum.org/d/21856"
     },
-    {
-      "name": "David Sevilla Martin",
-      "email": "me+fof@datitisev.me",
-      "role": "Developer"
-    }
-  ],
-  "autoload": {
-    "psr-4": {
-      "FoF\\GitHubAutolink\\": "src/"
-    }
-  },
-  "extra": {
-    "flarum-extension": {
-      "title": "FoF GitHub Autolink",
-      "icon": {
-        "name": "fab fa-github-alt",
-        "backgroundColor": "#e74c3c",
-        "color": "#fff"
-      }
+    "homepage": "https://friendsofflarum.org",
+    "funding": [
+        {
+            "type": "website",
+            "url": "https://opencollective.com/fof/donate"
+        }
+    ],
+    "require": {
+        "flarum/core": "^0.1.0-beta.14"
     },
-    "flagrow": {
-      "discuss": "https://discuss.flarum.org/d/21856-friendsofflarum-github-autolink"
+    "replace": {
+        "sijad/flarum-ext-github-autolink": "*"
+    },
+    "authors": [
+        {
+            "name": "Sajjad Hashemian",
+            "email": "wolaws@gmail.com",
+            "role": "Developer (Original)"
+        },
+        {
+            "name": "David Sevilla Martin",
+            "email": "me+fof@datitisev.me",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "FoF\\GitHubAutolink\\": "src/"
+        }
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "FoF GitHub Autolink",
+            "category": "feature",
+            "icon": {
+                "name": "fab fa-github-alt",
+                "backgroundColor": "#e74c3c",
+                "color": "#fff"
+            }
+        },
+        "flagrow": {
+            "discuss": "https://discuss.flarum.org/d/21856"
+        }
     }
-  }
 }
