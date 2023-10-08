@@ -4,7 +4,7 @@
 
 A [Flarum](http://flarum.org) extension. Autolink GitHub issues and commits in posts. Original by @sijad.
 
-![img](https://i.imgur.com/WnFaj2r.png)
+![img](https://user-images.githubusercontent.com/16573496/273462969-a32579ae-af47-4676-aadc-a9e9089388bd.png)
 
 ### Installation
 
