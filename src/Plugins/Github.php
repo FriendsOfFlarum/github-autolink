@@ -58,9 +58,4 @@ abstract class Github extends ConfiguratorBase
     abstract protected function getTemplateHref();
 
     abstract protected function getTemplateContent();
-
-    protected function log($message)
-    {
-        resolve('log')->debug('[FoF/GithubAutolink] '.$message);
-    }
 }
