@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of fof/github-autolink.
+ *
+ * Copyright (c) FriendsOfFlarum.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace FoF\GitHubAutolink\Plugins;
 
 use s9e\TextFormatter\Plugins\ConfiguratorBase;
@@ -52,6 +61,6 @@ abstract class Github extends ConfiguratorBase
 
     protected function log($message)
     {
-        resolve('log')->debug('[FoF/GithubAutolink] ' . $message);
+        resolve('log')->debug('[FoF/GithubAutolink] '.$message);
     }
 }

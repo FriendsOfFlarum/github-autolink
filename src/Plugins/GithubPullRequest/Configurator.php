@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of fof/github-autolink.
+ *
+ * Copyright (c) FriendsOfFlarum.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace FoF\GitHubAutolink\Plugins\GithubPullRequest;
 
 use FoF\GitHubAutolink\Plugins\Github;
@@ -35,6 +44,6 @@ class Configurator extends Github
 
     public function getJSParser()
     {
-        return \file_get_contents(realpath(__DIR__ . '/Parser.js'));
+        return \file_get_contents(realpath(__DIR__.'/Parser.js'));
     }
 }

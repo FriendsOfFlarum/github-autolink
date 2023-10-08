@@ -41,7 +41,6 @@ class Configurator extends Github
         return 'https://github.com/<xsl:value-of select="@repo"/>/commit/<xsl:value-of select="@commit"/><xsl:value-of select="@comment"/><xsl:value-of select="@diff"/>';
     }
 
-
     protected function getTemplateContent()
     {
         return '<xsl:value-of select="@repo"/><i class="fas fa-hashtag" aria-hidden="true" /><code><xsl:value-of select="substring(@commit, 1, 7)"/></code>
@@ -49,9 +48,8 @@ class Configurator extends Github
         <xsl:if test="string(@diff) and @diff != \'\'"> (diff)</xsl:if>';
     }
 
-
     public function getJSParser()
     {
-        return \file_get_contents(realpath(__DIR__ . '/Parser.js'));
+        return \file_get_contents(realpath(__DIR__.'/Parser.js'));
     }
 }

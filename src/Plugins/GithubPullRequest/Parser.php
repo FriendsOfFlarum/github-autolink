@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of fof/github-autolink.
+ *
+ * Copyright (c) FriendsOfFlarum.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace FoF\GitHubAutolink\Plugins\GithubPullRequest;
 
 use s9e\TextFormatter\Plugins\ParserBase;
@@ -22,10 +31,10 @@ class Parser extends ParserBase
             $isCommit = isset($m[4]) && \strpos($m[4][0], '/commits/') !== false;
 
             $attributes = [
-                'repo' => $m[1][0],
-                'pr'   => $m[2][0],
+                'repo'    => $m[1][0],
+                'pr'      => $m[2][0],
                 'comment' => $isComment ? $m[3][0] : '',
-                'commit' => $isCommit ? \explode('/commits/', $m[4][0])[1] : ''
+                'commit'  => $isCommit ? \explode('/commits/', $m[4][0])[1] : '',
             ];
 
             $tag->setAttributes($attributes);
