@@ -1,5 +1,47 @@
-  .github-commit-link code {
-    background-color: transparent;
-    color: inherit;
-    padding: 0;
+.Github-embed {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid @control-bg;
+  border-radius: @border-radius;
+  padding: 2px 6px;
+  text-decoration: none;
+  color: @text-color;
+  background-color: @control-bg;
+  font-size: 0.9em;
+  margin: 0 2px;
+
+  i.fab.fa-github {
+      margin-right: 4px;
   }
+
+  // Add general styling for FontAwesome icons used in the links
+  i.fas {
+      margin: 0 3px; // Spacing around the icons
+      font-size: 0.85em; // Slightly reduce the size for better visual alignment
+  }
+
+  i.fas.fa-code-branch,
+  i.fas.fa-exclamation-circle,
+  i.fas.fa-comment,
+  i.fas.fa-hashtag {
+      margin-right: 2px; // Adjust spacing between the repo name and the icons
+  }
+
+  &:hover {
+      background-color: darken(@control-bg, 5%);
+  }
+
+  &:active {
+      background-color: darken(@control-bg, 10%);
+  }
+}
+
+.github-commit-link, .github-issue-link, .github-pr-link {
+  code {
+      background-color: @code-bg;
+      color: @code-color;
+      padding: 2px 4px; // Add a little padding for visual balance
+      border-radius: @border-radius;
+      font-size: 0.9em;
+  }
+}

@@ -11,38 +11,47 @@
 
 namespace FoF\GitHubAutolink\Plugins\GithubCommit;
 
-use s9e\TextFormatter\Plugins\ConfiguratorBase;
+use FoF\GitHubAutolink\Plugins\Github;
 
-class Configurator extends ConfiguratorBase
+class Configurator extends Github
 {
     protected $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+)\/commit\/([0-9a-f]{7,40})(#commitcomment-\w+)?(#diff-[\w-]+)?|([\w-]+\/[\w-]+)@([0-9a-f]{7,40}))/si';
+
     protected $tagName = 'GITHUBCOMMIT';
 
-    protected function setUp()
+    protected function getClassName()
     {
-        if (isset($this->configurator->tags[$this->tagName])) {
-            return;
-        }
+        return 'github-commit-link';
+    }
 
-        $tag = $this->configurator->tags->add($this->tagName);
+    protected function getIcon()
+    {
+        return 'fas fa-hashtag';
+    }
 
-        $tag->attributes->add('repo');
+    protected function getSpecificAttributes($tag)
+    {
         $tag->attributes->add('commit');
         $tag->attributes->add('comment');
         $tag->attributes->add('diff');
-
-        $tag->template = '<a class="github-commit-link">
-            <xsl:attribute name="href">'.
-                'https://github.com/<xsl:value-of select="@repo"/>/commit/<xsl:value-of select="@commit"/><xsl:value-of select="@comment"/><xsl:value-of select="@diff"/>'.
-            '</xsl:attribute>
-            <xsl:value-of select="@repo"/>@<code><xsl:value-of select="substring(@commit, 1, 7)"/></code>
-            <xsl:if test="string(@comment) and @comment != \'\'"> (comment)</xsl:if>
-            <xsl:if test="string(@diff) and @diff != \'\'"> (diff)</xsl:if>
-        </a>';
     }
+
+    protected function getTemplateHref()
+    {
+        return 'https://github.com/<xsl:value-of select="@repo"/>/commit/<xsl:value-of select="@commit"/><xsl:value-of select="@comment"/><xsl:value-of select="@diff"/>';
+    }
+
+
+    protected function getTemplateContent()
+    {
+        return '<xsl:value-of select="@repo"/><i class="fas fa-hashtag" aria-hidden="true" /><code><xsl:value-of select="substring(@commit, 1, 7)"/></code>
+        <xsl:if test="string(@comment) and @comment != \'\'"><i class="fas fa-comment" aria-hidden="true" /></xsl:if>
+        <xsl:if test="string(@diff) and @diff != \'\'"> (diff)</xsl:if>';
+    }
+
 
     public function getJSParser()
     {
-        return \file_get_contents(realpath(__DIR__.'/Parser.js'));
+        return \file_get_contents(realpath(__DIR__ . '/Parser.js'));
     }
 }

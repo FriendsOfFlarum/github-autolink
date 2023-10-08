@@ -1,6 +1,6 @@
 <?php
 
-namespace FoF\GitHubAutolink\Plugins\GithubIssue;
+namespace FoF\GitHubAutolink\Plugins\GithubPullRequest;
 
 use s9e\TextFormatter\Plugins\ParserBase;
 
@@ -15,20 +15,18 @@ class Parser extends ParserBase
                 $tagName,
                 $m[0][1],
                 \strlen($m[0][0]),
-                -10
+                -100
             );
 
-            $attributes = [
-                'repo'    => $m[1][1] >= 0 ? $m[1][0] : $m[5][0],
-                'type'    => $m[2][1] >= 0 ? $m[2][0] : 'issues',
-                'issue'   => $m[3][1] >= 0 ? $m[3][0] : $m[6][0]
-            ];
+            $isComment = isset($m[3]) && \strpos($m[3][0], '#') === 0;
+            $isCommit = isset($m[4]) && \strpos($m[4][0], '/commits/') !== false;
 
-            if (isset($m[4]) && $m[4][1] >= 0) {
-                $attributes['comment'] = $m[4][0];
-            } else {
-                $attributes['comment'] = '';
-            }
+            $attributes = [
+                'repo' => $m[1][0],
+                'pr'   => $m[2][0],
+                'comment' => $isComment ? $m[3][0] : '',
+                'commit' => $isCommit ? \explode('/commits/', $m[4][0])[1] : ''
+            ];
 
             $tag->setAttributes($attributes);
         }

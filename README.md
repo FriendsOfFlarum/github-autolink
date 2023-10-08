@@ -8,16 +8,17 @@ A [Flarum](http://flarum.org) extension. Autolink GitHub issues and commits in p
 
 ### Installation
 
-Use [Bazaar](https://discuss.flarum.org/d/5151-flagrow-bazaar-the-extension-marketplace) or install manually with composer:
+Install manually with composer:
 
 ```sh
-composer require fof/github-autolink
+composer require fof/github-autolink:"*"
 ```
 
 ### Updating
 
 ```sh
 composer update fof/github-autolink
+php flarum cache:clear
 ```
 
 ### Links
