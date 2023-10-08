@@ -4,20 +4,21 @@
 
 A [Flarum](http://flarum.org) extension. Autolink GitHub issues and commits in posts. Original by @sijad.
 
-![img](https://i.imgur.com/WnFaj2r.png)
+![img](https://user-images.githubusercontent.com/16573496/273462969-a32579ae-af47-4676-aadc-a9e9089388bd.png)
 
 ### Installation
 
-Use [Bazaar](https://discuss.flarum.org/d/5151-flagrow-bazaar-the-extension-marketplace) or install manually with composer:
+Install manually with composer:
 
 ```sh
-composer require fof/github-autolink
+composer require fof/github-autolink:"*"
 ```
 
 ### Updating
 
 ```sh
 composer update fof/github-autolink
+php flarum cache:clear
 ```
 
 ### Links

@@ -11,33 +11,34 @@
 
 namespace FoF\GitHubAutolink\Plugins\GithubIssue;
 
-use s9e\TextFormatter\Plugins\ConfiguratorBase;
+use FoF\GitHubAutolink\Plugins\Github;
 
-class Configurator extends ConfiguratorBase
+class Configurator extends Github
 {
-    protected $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+)\/(issues|pull)\/(\d+)(#issuecomment-\d+)?|([\w-]+\/[\w-]+)#(\d+))/si';
+    protected $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+)\/(issues)\/(\d+)(#issuecomment-\d+)?|([\w-]+\/[\w-]+)#(\d+))/si';
     protected $tagName = 'GITHUBISSUE';
 
-    protected function setUp()
+    protected function getClassName()
     {
-        if (isset($this->configurator->tags[$this->tagName])) {
-            return;
-        }
+        return 'github-issue-link';
+    }
 
-        $tag = $this->configurator->tags->add($this->tagName);
-
-        $tag->attributes->add('repo');
+    protected function getSpecificAttributes($tag)
+    {
         $tag->attributes->add('type');
         $tag->attributes->add('issue');
         $tag->attributes->add('comment');
+    }
 
-        $tag->template = '<a class="github-issue-link">
-            <xsl:attribute name="href">'.
-                'https://github.com/<xsl:value-of select="@repo"/>/<xsl:value-of select="@type"/>/<xsl:value-of select="@issue"/><xsl:value-of select="@comment"/>'.
-            '</xsl:attribute>
-            <xsl:value-of select="@repo"/>#<xsl:value-of select="@issue"/>
-            <xsl:if test="string(@comment) and @comment != \'\'"> (comment)</xsl:if>
-        </a>';
+    protected function getTemplateHref()
+    {
+        return 'https://github.com/<xsl:value-of select="@repo"/>/<xsl:value-of select="@type"/>/<xsl:value-of select="@issue"/><xsl:value-of select="@comment"/>';
+    }
+
+    protected function getTemplateContent()
+    {
+        return '<xsl:value-of select="@repo"/><i class="fas fa-exclamation-circle" aria-hidden="true" /><xsl:value-of select="@issue"/>
+               <xsl:if test="string(@comment) and @comment != \'\'"><i class="fas fa-comment" aria-hidden="true" /></xsl:if>';
     }
 
     public function getJSParser()

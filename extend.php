@@ -19,6 +19,7 @@ return [
         ->css(__DIR__.'/less/forum.less'),
     (new Extend\Formatter())
         ->configure(function (Configurator $configurator) {
+            $configurator->plugins->set('GithubPullRequestAutolink', Plugins\GithubPullRequest\Configurator::class);
             $configurator->plugins->set('GithubIssueAutolink', Plugins\GithubIssue\Configurator::class);
             $configurator->plugins->set('GithubCommitAutolink', Plugins\GithubCommit\Configurator::class);
         }),
