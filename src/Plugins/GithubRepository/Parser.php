@@ -24,7 +24,7 @@ class Parser extends ParserBase
                 $tagName,
                 $m[0][1],
                 \strlen($m[0][0]),
-                -200
+                -10
             );
 
             $tag->setAttributes(
