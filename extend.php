@@ -22,5 +22,7 @@ return [
             $configurator->plugins->set('GithubPullRequestAutolink', Plugins\GithubPullRequest\Configurator::class);
             $configurator->plugins->set('GithubIssueAutolink', Plugins\GithubIssue\Configurator::class);
             $configurator->plugins->set('GithubCommitAutolink', Plugins\GithubCommit\Configurator::class);
+            $configurator->plugins->set('GithubRepositoryAutolink', Plugins\GithubRepository\Configurator::class);
+            $configurator->plugins->set('GithubCompareAutolink', Plugins\GithubCompare\Configurator::class);
         }),
 ];
