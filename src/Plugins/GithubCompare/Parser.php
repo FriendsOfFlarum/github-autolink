@@ -31,7 +31,7 @@ class Parser extends ParserBase
                 [
                     'repo'  => $m[1][0],
                     'base'  => $m[2][0],
-                    'head'  => $m[3][0]
+                    'head'  => $m[3][0],
                 ]
             );
         }
