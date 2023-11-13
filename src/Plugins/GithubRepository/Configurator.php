@@ -12,10 +12,11 @@
 namespace FoF\GitHubAutolink\Plugins\GithubRepository;
 
 use FoF\GitHubAutolink\Plugins\Github;
+use s9e\TextFormatter\Configurator\Items\Tag;
 
 class Configurator extends Github
 {
-    protected $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+))/si';
+    protected $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+)(\/[^\s]*)?)/si';
     protected $tagName = 'GITHUBREPO';
 
     protected function getClassName()
@@ -23,14 +24,14 @@ class Configurator extends Github
         return 'github-repo-link';
     }
 
-    protected function getSpecificAttributes($tag)
+    protected function getSpecificAttributes(Tag $tag)
     {
-        // None
+        $tag->attributes->add('repopath');
     }
 
     protected function getTemplateHref()
     {
-        return 'https://github.com/<xsl:value-of select="@repo"/>';
+        return 'https://github.com/<xsl:value-of select="@repo"/><xsl:value-of select="@repopath"/>';
     }
 
     protected function getTemplateContent()

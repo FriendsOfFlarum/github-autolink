@@ -12,6 +12,7 @@
 namespace FoF\GitHubAutolink\Plugins\GithubCompare;
 
 use FoF\GitHubAutolink\Plugins\Github;
+use s9e\TextFormatter\Configurator\Items\Tag;
 
 class Configurator extends Github
 {
@@ -24,7 +25,7 @@ class Configurator extends Github
         return 'github-compare-link';
     }
 
-    protected function getSpecificAttributes($tag)
+    protected function getSpecificAttributes(Tag $tag)
     {
         $tag->attributes->add('base');
         $tag->attributes->add('head');

@@ -236,4 +236,23 @@ EOT;
         $this->assertStringContainsString('github-compare-link', $post['attributes']['contentHtml']);
         $this->assertStringContainsString('href="https://github.com/flarum/framework/compare/v1.8.2...v1.8.3"', $post['attributes']['contentHtml']);
     }
+
+    /**
+     * @test
+     */
+    public function it_renders_undefined_github_links()
+    {
+        $url = 'https://github.com/EsotericSoftware/spine-runtimes/tree/4.1/spine-sdl#spine-version';
+        $response = $this->postContent($url);
+
+        $this->assertEquals(201, $response->getStatusCode());
+
+        $post = json_decode($response->getBody()->getContents(), true)['data'];
+
+        // Should render the normal repo link, with the full href supplied in the content
+
+        $this->assertStringContainsString('Github-embed', $post['attributes']['contentHtml']);
+        $this->assertStringContainsString('github-repo-link', $post['attributes']['contentHtml']);
+        $this->assertStringContainsString('href="'.$url.'"', $post['attributes']['contentHtml']);
+    }
 }
