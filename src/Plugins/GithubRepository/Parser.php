@@ -31,8 +31,8 @@ class Parser extends ParserBase
 
             $tag->setAttributes(
                 [
-                    'repo'    => $m[1][1] >= 0 ? $m[1][0] : $m[5][0],
-                    'repopath' => $repoPath
+                    'repo'     => $m[1][1] >= 0 ? $m[1][0] : $m[5][0],
+                    'repopath' => $repoPath,
                 ]
             );
         }
