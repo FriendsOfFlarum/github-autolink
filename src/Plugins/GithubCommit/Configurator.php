@@ -12,6 +12,7 @@
 namespace FoF\GitHubAutolink\Plugins\GithubCommit;
 
 use FoF\GitHubAutolink\Plugins\Github;
+use s9e\TextFormatter\Configurator\Items\Tag;
 
 class Configurator extends Github
 {
@@ -29,7 +30,7 @@ class Configurator extends Github
         return 'fas fa-hashtag';
     }
 
-    protected function getSpecificAttributes($tag)
+    protected function getSpecificAttributes(Tag $tag)
     {
         $tag->attributes->add('commit');
         $tag->attributes->add('comment');

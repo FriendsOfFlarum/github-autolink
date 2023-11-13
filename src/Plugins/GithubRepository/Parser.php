@@ -27,9 +27,12 @@ class Parser extends ParserBase
                 -10
             );
 
+            $repoPath = isset($m[2]) && $m[2][1] >= 0 ? $m[2][0] : '';
+
             $tag->setAttributes(
                 [
                     'repo'    => $m[1][1] >= 0 ? $m[1][0] : $m[5][0],
+                    'repopath' => $repoPath
                 ]
             );
         }

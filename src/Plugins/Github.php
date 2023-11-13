@@ -11,6 +11,7 @@
 
 namespace FoF\GitHubAutolink\Plugins;
 
+use s9e\TextFormatter\Configurator\Items\Tag;
 use s9e\TextFormatter\Plugins\ConfiguratorBase;
 
 abstract class Github extends ConfiguratorBase
@@ -19,7 +20,7 @@ abstract class Github extends ConfiguratorBase
 
     abstract protected function getClassName();
 
-    abstract protected function getSpecificAttributes($tag);
+    abstract protected function getSpecificAttributes(Tag $tag);
 
     protected function setUp()
     {
@@ -34,18 +35,23 @@ abstract class Github extends ConfiguratorBase
         $this->setTemplate($tag);
     }
 
-    protected function setCommonAttributes($tag)
+    protected function setCommonAttributes(Tag $tag)
     {
         $tag->attributes->add('repo');
     }
 
-    protected function setTemplate($tag)
+    protected function setTemplate(Tag $tag)
     {
-        $tag->template = sprintf(
+        $tag->setTemplate($this->makeTemplate());
+    }
+
+    protected function makeTemplate(): string
+    {
+        return sprintf(
             '<a class="Github-embed %1$s">
             <xsl:attribute name="href">%2$s</xsl:attribute>
             <xsl:attribute name="target">_blank</xsl:attribute>
-            <xsl:attribute name="rel">noopener noreferrer</xsl:attribute>
+            <xsl:attribute name="rel">ugc noopener noreferrer</xsl:attribute>
             <i class="fab fa-github" aria-hidden="true" />
             %3$s
         </a>',

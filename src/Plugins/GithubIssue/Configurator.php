@@ -12,6 +12,7 @@
 namespace FoF\GitHubAutolink\Plugins\GithubIssue;
 
 use FoF\GitHubAutolink\Plugins\Github;
+use s9e\TextFormatter\Configurator\Items\Tag;
 
 class Configurator extends Github
 {
@@ -23,7 +24,7 @@ class Configurator extends Github
         return 'github-issue-link';
     }
 
-    protected function getSpecificAttributes($tag)
+    protected function getSpecificAttributes(Tag $tag)
     {
         $tag->attributes->add('type');
         $tag->attributes->add('issue');

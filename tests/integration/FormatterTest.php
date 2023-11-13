@@ -242,7 +242,7 @@ EOT;
      */
     public function it_renders_undefined_github_links()
     {
-        $url = 'https://github.com/s9e/TextFormatter/blob/ee19656423606c5b0595f9d48db62ee0ad31ff08/src/Plugins/BBCodes/Configurator/repository.xml#L46-L74';
+        $url = 'https://github.com/EsotericSoftware/spine-runtimes/tree/4.1/spine-sdl#spine-version';
         $response = $this->postContent($url);
 
         $this->assertEquals(201, $response->getStatusCode());
