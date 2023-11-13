@@ -36,7 +36,7 @@ class Configurator extends Github
 
     protected function getTemplateContent()
     {
-        return '<xsl:value-of select="@repo"/>';
+        return '<xsl:value-of select="@repo"/><xsl:if test="string(@repopath) and @repopath != \'\'"><span class="github-repo-link--path"><xsl:value-of select="substring(@repopath, 2)"/></span></xsl:if>';
     }
 
     public function getJSParser()
