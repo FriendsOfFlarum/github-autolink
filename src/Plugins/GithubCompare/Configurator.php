@@ -16,7 +16,7 @@ use s9e\TextFormatter\Configurator\Items\Tag;
 
 class Configurator extends Github
 {
-    protected $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w.-]+\/[\w.-]+)\/compare\/([\w\-\.]+)\.\.\.([\w\-\.]+))/si';
+    protected $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+)\/compare\/([\w\-\.]+)\.\.\.([\w\-\.]+))/si';
 
     protected $tagName = 'GITHUBCOMPARE';
 

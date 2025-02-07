@@ -16,7 +16,7 @@ use s9e\TextFormatter\Configurator\Items\Tag;
 
 class Configurator extends Github
 {
-    protected $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w.-]+\/[\w.-]+)\/pull\/(\d+)(#pullrequestreview-\d+)?(\/commits\/[0-9a-f]{7,40})?)/si';
+    protected $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+)\/pull\/(\d+)(#pullrequestreview-\d+)?(\/commits\/[0-9a-f]{7,40})?)/si';
     protected $tagName = 'GITHUBPR';
 
     protected function getClassName()
