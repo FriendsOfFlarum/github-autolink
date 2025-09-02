@@ -1,12 +1,12 @@
 .Github-embed {
   display: inline-flex;
   align-items: center;
-  border: 1px solid @control-bg;
-  border-radius: @border-radius;
+  border: 1px solid var(--control-bg);
+  border-radius: var(--border-radius);
   padding: 2px 6px;
   text-decoration: none;
-  color: @text-color;
-  background-color: @control-bg;
+  color: var(--text-color);
+  background-color: var(--control-bg);
   font-size: 0.9em;
   margin: 0 2px;
 
@@ -28,20 +28,20 @@
   }
 
   &:hover {
-      background-color: darken(@control-bg, 5%);
+      background-color: color-mix(in srgb, var(--control-bg), black 5%);
   }
 
   &:active {
-      background-color: darken(@control-bg, 10%);
+      background-color: color-mix(in srgb, var(--control-bg), black 10%);
   }
 }
 
 .github-commit-link, .github-issue-link, .github-pr-link {
   code {
-      background-color: @code-bg;
-      color: @code-color;
+      background-color: var(--code-bg);
+      color: var(--code-color);
       padding: 2px 4px; // Add a little padding for visual balance
-      border-radius: @border-radius;
+      border-radius: var(--border-radius);
       font-size: 0.9em;
   }
 }

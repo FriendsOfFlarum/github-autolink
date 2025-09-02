@@ -23,20 +23,15 @@
         }
     ],
     "require": {
-        "flarum/core": "^1.0.0"
+        "flarum/core": "2.x-dev"
     },
     "replace": {
         "sijad/flarum-ext-github-autolink": "*"
     },
     "authors": [
         {
-            "name": "Sajjad Hashemian",
-            "email": "wolaws@gmail.com",
-            "role": "Developer (Original)"
-        },
-        {
-            "name": "David Sevilla Martin",
-            "email": "me+fof@datitisev.me",
+            "name": "FoF Team",
+            "email": "team@friendsofflarum.org",
             "role": "Developer"
         }
     ],
@@ -89,7 +84,7 @@
         "analyse:phpstan": "Run static analysis"
     },
     "require-dev": {
-        "flarum/testing": "^1.0.0",
-        "flarum/phpstan": "*"
+        "flarum/testing": "2.x-dev",
+        "flarum/phpstan": "2.x-dev"
     }
 }
