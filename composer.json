@@ -23,7 +23,7 @@
         }
     ],
     "require": {
-        "flarum/core": "2.x-dev"
+        "flarum/core": "^2.0.0"
     },
     "replace": {
         "sijad/flarum-ext-github-autolink": "*"
@@ -84,7 +84,9 @@
         "analyse:phpstan": "Run static analysis"
     },
     "require-dev": {
-        "flarum/testing": "2.x-dev",
-        "flarum/phpstan": "2.x-dev"
-    }
+        "flarum/testing": "^2.0.0",
+        "flarum/phpstan": "^2.0.0"
+    },
+    "minimum-stability": "beta",
+    "prefer-stable:" true
 }
