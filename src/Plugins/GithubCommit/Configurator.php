@@ -16,33 +16,33 @@ use s9e\TextFormatter\Configurator\Items\Tag;
 
 class Configurator extends Github
 {
-    protected $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+)\/commit\/([0-9a-f]{7,40})(#commitcomment-\w+)?(#diff-[\w-]+)?|([\w-]+\/[\w-]+)@([0-9a-f]{7,40}))/si';
+    protected string $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+)\/commit\/([0-9a-f]{7,40})(#commitcomment-\w+)?(#diff-[\w-]+)?|([\w-]+\/[\w-]+)@([0-9a-f]{7,40}))/si';
 
-    protected $tagName = 'GITHUBCOMMIT';
+    protected ?string $tagName = 'GITHUBCOMMIT';
 
-    protected function getClassName()
+    protected function getClassName(): string
     {
         return 'github-commit-link';
     }
 
-    protected function getIcon()
+    protected function getIcon(): string
     {
         return 'fas fa-hashtag';
     }
 
-    protected function getSpecificAttributes(Tag $tag)
+    protected function getSpecificAttributes(Tag $tag): void
     {
         $tag->attributes->add('commit');
         $tag->attributes->add('comment');
         $tag->attributes->add('diff');
     }
 
-    protected function getTemplateHref()
+    protected function getTemplateHref(): string
     {
         return 'https://github.com/<xsl:value-of select="@repo"/>/commit/<xsl:value-of select="@commit"/><xsl:value-of select="@comment"/><xsl:value-of select="@diff"/>';
     }
 
-    protected function getTemplateContent()
+    protected function getTemplateContent(): string
     {
         return '<xsl:value-of select="@repo"/><i class="fas fa-hashtag" aria-hidden="true" /><code><xsl:value-of select="substring(@commit, 1, 7)"/></code>
         <xsl:if test="string(@comment) and @comment != \'\'"><i class="fas fa-comment" aria-hidden="true" /></xsl:if>

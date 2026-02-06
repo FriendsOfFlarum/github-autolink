@@ -16,25 +16,25 @@ use s9e\TextFormatter\Configurator\Items\Tag;
 
 class Configurator extends Github
 {
-    protected $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+)(\/[^\s]*)?)/si';
-    protected $tagName = 'GITHUBREPO';
+    protected string $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+)(\/[^\s]*)?)/si';
+    protected ?string $tagName = 'GITHUBREPO';
 
-    protected function getClassName()
+    protected function getClassName(): string
     {
         return 'github-repo-link';
     }
 
-    protected function getSpecificAttributes(Tag $tag)
+    protected function getSpecificAttributes(Tag $tag): void
     {
         $tag->attributes->add('repopath');
     }
 
-    protected function getTemplateHref()
+    protected function getTemplateHref(): string
     {
         return 'https://github.com/<xsl:value-of select="@repo"/><xsl:value-of select="@repopath"/>';
     }
 
-    protected function getTemplateContent()
+    protected function getTemplateContent(): string
     {
         return '<xsl:value-of select="@repo"/><xsl:if test="string(@repopath) and @repopath != \'\'"><span class="github-repo-link--path"><xsl:value-of select="substring(@repopath, 2)"/></span></xsl:if>';
     }

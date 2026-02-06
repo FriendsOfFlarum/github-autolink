@@ -16,27 +16,27 @@ use s9e\TextFormatter\Configurator\Items\Tag;
 
 class Configurator extends Github
 {
-    protected $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+)\/pull\/(\d+)(#pullrequestreview-\d+)?(\/commits\/[0-9a-f]{7,40})?)/si';
-    protected $tagName = 'GITHUBPR';
+    protected string $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+)\/pull\/(\d+)(#pullrequestreview-\d+)?(\/commits\/[0-9a-f]{7,40})?)/si';
+    protected ?string $tagName = 'GITHUBPR';
 
-    protected function getClassName()
+    protected function getClassName(): string
     {
         return 'github-pr-link';
     }
 
-    protected function getSpecificAttributes(Tag $tag)
+    protected function getSpecificAttributes(Tag $tag): void
     {
         $tag->attributes->add('pr');
         $tag->attributes->add('comment');
         $tag->attributes->add('commit');
     }
 
-    protected function getTemplateHref()
+    protected function getTemplateHref(): string
     {
         return 'https://github.com/<xsl:value-of select="@repo"/>/pull/<xsl:value-of select="@pr"/><xsl:if test="string(@comment) and @comment != \'\'"><xsl:value-of select="@comment"/></xsl:if><xsl:if test="string(@commit) and @commit != \'\'">/commits/<xsl:value-of select="@commit"/></xsl:if>';
     }
 
-    protected function getTemplateContent()
+    protected function getTemplateContent(): string
     {
         return '<xsl:value-of select="@repo"/><i class="fas fa-code-branch" aria-hidden="true" /><xsl:value-of select="@pr"/>
             <xsl:if test="string(@comment) and @comment != \'\'"><i class="fas fa-comment" aria-hidden="true" /></xsl:if>

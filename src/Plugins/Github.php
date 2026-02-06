@@ -16,13 +16,13 @@ use s9e\TextFormatter\Plugins\ConfiguratorBase;
 
 abstract class Github extends ConfiguratorBase
 {
-    protected $tagName = null;
+    protected ?string $tagName = null;
 
-    abstract protected function getClassName();
+    abstract protected function getClassName(): string;
 
-    abstract protected function getSpecificAttributes(Tag $tag);
+    abstract protected function getSpecificAttributes(Tag $tag): void;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (isset($this->configurator->tags[$this->tagName])) {
             return;
@@ -35,12 +35,12 @@ abstract class Github extends ConfiguratorBase
         $this->setTemplate($tag);
     }
 
-    protected function setCommonAttributes(Tag $tag)
+    protected function setCommonAttributes(Tag $tag): void
     {
         $tag->attributes->add('repo');
     }
 
-    protected function setTemplate(Tag $tag)
+    protected function setTemplate(Tag $tag): void
     {
         $tag->setTemplate($this->makeTemplate());
     }
@@ -61,7 +61,7 @@ abstract class Github extends ConfiguratorBase
         );
     }
 
-    abstract protected function getTemplateHref();
+    abstract protected function getTemplateHref(): string;
 
-    abstract protected function getTemplateContent();
+    abstract protected function getTemplateContent(): string;
 }

@@ -16,27 +16,27 @@ use s9e\TextFormatter\Configurator\Items\Tag;
 
 class Configurator extends Github
 {
-    protected $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+)\/compare\/([\w\-\.]+)\.\.\.([\w\-\.]+))/si';
+    protected string $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+)\/compare\/([\w\-\.]+)\.\.\.([\w\-\.]+))/si';
 
-    protected $tagName = 'GITHUBCOMPARE';
+    protected ?string $tagName = 'GITHUBCOMPARE';
 
-    protected function getClassName()
+    protected function getClassName(): string
     {
         return 'github-compare-link';
     }
 
-    protected function getSpecificAttributes(Tag $tag)
+    protected function getSpecificAttributes(Tag $tag): void
     {
         $tag->attributes->add('base');
         $tag->attributes->add('head');
     }
 
-    protected function getTemplateHref()
+    protected function getTemplateHref(): string
     {
         return 'https://github.com/<xsl:value-of select="@repo"/>/compare/<xsl:value-of select="@base"/>...<xsl:value-of select="@head"/>';
     }
 
-    protected function getTemplateContent()
+    protected function getTemplateContent(): string
     {
         return '<xsl:value-of select="@repo"/><i class="fas fa-arrow-right" aria-hidden="true" /><code><xsl:value-of select="@base"/> → <xsl:value-of select="@head"/></code>';
     }

@@ -16,27 +16,27 @@ use s9e\TextFormatter\Configurator\Items\Tag;
 
 class Configurator extends Github
 {
-    protected $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+)\/(issues)\/(\d+)(#issuecomment-\d+)?|([\w-]+\/[\w-]+)#(\d+))/si';
-    protected $tagName = 'GITHUBISSUE';
+    protected string $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+)\/(issues)\/(\d+)(#issuecomment-\d+)?|([\w-]+\/[\w-]+)#(\d+))/si';
+    protected ?string $tagName = 'GITHUBISSUE';
 
-    protected function getClassName()
+    protected function getClassName(): string
     {
         return 'github-issue-link';
     }
 
-    protected function getSpecificAttributes(Tag $tag)
+    protected function getSpecificAttributes(Tag $tag): void
     {
         $tag->attributes->add('type');
         $tag->attributes->add('issue');
         $tag->attributes->add('comment');
     }
 
-    protected function getTemplateHref()
+    protected function getTemplateHref(): string
     {
         return 'https://github.com/<xsl:value-of select="@repo"/>/<xsl:value-of select="@type"/>/<xsl:value-of select="@issue"/><xsl:value-of select="@comment"/>';
     }
 
-    protected function getTemplateContent()
+    protected function getTemplateContent(): string
     {
         return '<xsl:value-of select="@repo"/><i class="fas fa-exclamation-circle" aria-hidden="true" /><xsl:value-of select="@issue"/>
                <xsl:if test="string(@comment) and @comment != \'\'"><i class="fas fa-comment" aria-hidden="true" /></xsl:if>';
