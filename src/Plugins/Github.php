@@ -63,7 +63,7 @@ abstract class Github extends ConfiguratorBase
 
     protected function getRepoNameTemplate(): string
     {
-        return "<span class=\"github-repo-name\"><xsl:value-of select=\"@repo\"/></span>";
+        return '<span class="github-repo-name"><xsl:value-of select="@repo"/></span>';
     }
 
     abstract protected function getTemplateHref(): string;
