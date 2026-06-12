@@ -17,6 +17,7 @@ use Flarum\Post\Post;
 use Flarum\Testing\integration\RetrievesAuthorizedUsers;
 use Flarum\Testing\integration\TestCase;
 use Flarum\User\User;
+use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\ResponseInterface;
 
 class FormatterTest extends TestCase
@@ -65,9 +66,7 @@ class FormatterTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_renders_a_github_pr_link()
     {
         $response = $this->postContent("Here's a PR https://github.com/flarum/framework/pull/3876");
@@ -81,9 +80,7 @@ class FormatterTest extends TestCase
         $this->assertStringContainsString('href="https://github.com/flarum/framework/pull/3876"', $post['attributes']['contentHtml']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_renders_a_github_pr_comment()
     {
         $response = $this->postContent('PR Comment: https://github.com/flarum/framework/pull/3872#pullrequestreview-1585769864');
@@ -97,9 +94,7 @@ class FormatterTest extends TestCase
         $this->assertStringContainsString('href="https://github.com/flarum/framework/pull/3872#pullrequestreview-1585769864"', $post['attributes']['contentHtml']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_renders_a_commit_inside_a_pr()
     {
         $response = $this->postContent('Commit inside a PR: https://github.com/flarum/framework/pull/3877/commits/7a94f011df1a3c3f9f32f72c11b1efa9ca17acd2');
@@ -113,9 +108,7 @@ class FormatterTest extends TestCase
         $this->assertStringContainsString('href="https://github.com/flarum/framework/pull/3877/commits/7a94f011df1a3c3f9f32f72c11b1efa9ca17acd2"', $post['attributes']['contentHtml']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_renders_a_normal_commit()
     {
         $response = $this->postContent('Normal commit: https://github.com/FriendsOfFlarum/default-group/commit/ca783dee209fe126b677ec73a18d1ed4ccc4e76c');
@@ -129,9 +122,7 @@ class FormatterTest extends TestCase
         $this->assertStringContainsString('href="https://github.com/FriendsOfFlarum/default-group/commit/ca783dee209fe126b677ec73a18d1ed4ccc4e76c"', $post['attributes']['contentHtml']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_renders_a_commit_comment()
     {
         $response = $this->postContent('Commit comment: https://github.com/FriendsOfFlarum/default-group/commit/ca783dee209fe126b677ec73a18d1ed4ccc4e76c#commitcomment-129448475');
@@ -145,9 +136,7 @@ class FormatterTest extends TestCase
         $this->assertStringContainsString('href="https://github.com/FriendsOfFlarum/default-group/commit/ca783dee209fe126b677ec73a18d1ed4ccc4e76c#commitcomment-129448475"', $post['attributes']['contentHtml']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_renders_an_issue()
     {
         $response = $this->postContent('Issue: https://github.com/flarum/framework/issues/3895');
@@ -161,9 +150,7 @@ class FormatterTest extends TestCase
         $this->assertStringContainsString('href="https://github.com/flarum/framework/issues/3895"', $post['attributes']['contentHtml']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_renders_a_repository()
     {
         $response = $this->postContent('Repo: https://github.com/imorland/flarum-ext-twofactor');
@@ -177,9 +164,7 @@ class FormatterTest extends TestCase
         $this->assertStringContainsString('href="https://github.com/imorland/flarum-ext-twofactor"', $post['attributes']['contentHtml']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_renders_a_compare_link()
     {
         $response = $this->postContent('Compare: https://github.com/flarum/framework/compare/v1.8.2...v1.8.3');
@@ -193,9 +178,22 @@ class FormatterTest extends TestCase
         $this->assertStringContainsString('href="https://github.com/flarum/framework/compare/v1.8.2...v1.8.3"', $post['attributes']['contentHtml']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
+    public function it_renders_a_release_link()
+    {
+        $link = 'https://github.com/flarum/framework/releases/tag/v1.8.3';
+        $response = $this->postContent("Release: $link");
+
+        $this->assertEquals(201, $response->getStatusCode());
+
+        $post = json_decode($response->getBody()->getContents(), true)['data'];
+
+        $this->assertStringContainsString('Github-embed', $post['attributes']['contentHtml']);
+        $this->assertStringContainsString('github-release-link', $post['attributes']['contentHtml']);
+        $this->assertStringContainsString("href=\"$link\"", $post['attributes']['contentHtml']);
+    }
+
+    #[Test]
     public function it_renders_all_links_together()
     {
         $content = <<<'EOT'
@@ -207,6 +205,7 @@ Commit comment: https://github.com/FriendsOfFlarum/default-group/commit/ca783dee
 Issue: https://github.com/flarum/framework/issues/3895
 Repo: https://github.com/imorland/flarum-ext-twofactor
 Compare: https://github.com/flarum/framework/compare/v1.8.2...v1.8.3
+Release: https://github.com/flarum/framework/releases/tag/v1.8.3
 EOT;
 
         $response = $this->postContent($content);
@@ -238,11 +237,12 @@ EOT;
 
         $this->assertStringContainsString('github-compare-link', $post['attributes']['contentHtml']);
         $this->assertStringContainsString('href="https://github.com/flarum/framework/compare/v1.8.2...v1.8.3"', $post['attributes']['contentHtml']);
+
+        $this->assertStringContainsString('github-release-link', $post['attributes']['contentHtml']);
+        $this->assertStringContainsString('href="https://github.com/flarum/framework/releases/tag/v1.8.3"', $post['attributes']['contentHtml']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_renders_undefined_github_links()
     {
         $url = 'https://github.com/EsotericSoftware/spine-runtimes/tree/4.1/spine-sdl#spine-version';
