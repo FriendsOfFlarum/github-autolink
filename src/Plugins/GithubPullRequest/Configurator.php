@@ -16,7 +16,7 @@ use s9e\TextFormatter\Configurator\Items\Tag;
 
 class Configurator extends Github
 {
-    protected string $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+)\/pull\/(\d+)(#pullrequestreview-\d+)?(\/commits\/[0-9a-f]{7,40})?)/si';
+    protected string $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+)\/pull\/(\d+)(#pullrequestreview-\d+)?(\/(?:commits|changes)\/([0-9a-f]{7,40}))?)/si';
     protected ?string $tagName = 'GITHUBPR';
 
     protected function getClassName(): string
@@ -33,7 +33,7 @@ class Configurator extends Github
 
     protected function getTemplateHref(): string
     {
-        return 'https://github.com/<xsl:value-of select="@repo"/>/pull/<xsl:value-of select="@pr"/><xsl:if test="string(@comment) and @comment != \'\'"><xsl:value-of select="@comment"/></xsl:if><xsl:if test="string(@commit) and @commit != \'\'">/commits/<xsl:value-of select="@commit"/></xsl:if>';
+        return 'https://github.com/<xsl:value-of select="@repo"/>/pull/<xsl:value-of select="@pr"/><xsl:if test="string(@comment) and @comment != \'\'"><xsl:value-of select="@comment"/></xsl:if><xsl:if test="string(@commit) and @commit != \'\'">/changes/<xsl:value-of select="@commit"/></xsl:if>';
     }
 
     protected function getTemplateContent(): string
