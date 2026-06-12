@@ -36,7 +36,13 @@ class Configurator extends Github
 
     protected function getTemplateContent(): string
     {
-        return '<xsl:value-of select="@repo"/><i class="fas fa-tag" aria-hidden="true" /><xsl:value-of select="@tag"/>';
+        return <<<XML
+{$this->getRepoNameTemplate()}
+<i class="fas fa-tag" aria-hidden="true" />
+<span class="github-release-link--tag">
+    <xsl:value-of select="@tag"/>
+</span>
+XML;
     }
 
     public function getJSParser()

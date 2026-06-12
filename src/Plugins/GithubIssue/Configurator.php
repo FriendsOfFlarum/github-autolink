@@ -38,8 +38,17 @@ class Configurator extends Github
 
     protected function getTemplateContent(): string
     {
-        return '<xsl:value-of select="@repo"/><i class="fas fa-exclamation-circle" aria-hidden="true" /><xsl:value-of select="@issue"/>
-               <xsl:if test="string(@comment) and @comment != \'\'"><i class="fas fa-comment" aria-hidden="true" /></xsl:if>';
+        return <<<XML
+{$this->getRepoNameTemplate()}
+<i class="fas fa-exclamation-circle" aria-hidden="true" />
+<span class="github-issue-link--number">
+    <xsl:value-of select="@issue"/>
+</span>
+
+<xsl:if test="string(@comment) and @comment != ''">
+    <i class="fas fa-comment" aria-hidden="true" />
+</xsl:if>
+XML;
     }
 
     public function getJSParser()

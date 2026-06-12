@@ -36,7 +36,14 @@ class Configurator extends Github
 
     protected function getTemplateContent(): string
     {
-        return '<xsl:value-of select="@repo"/><xsl:if test="string(@repopath) and @repopath != \'\'"><span class="github-repo-link--path"><xsl:value-of select="substring(@repopath, 2)"/></span></xsl:if>';
+        return <<<XML
+{$this->getRepoNameTemplate()}
+<xsl:if test="string(@repopath) and @repopath != ''">
+    <span class="github-repo-link--path">
+        <xsl:value-of select="substring(@repopath, 2)"/>
+    </span>
+</xsl:if>
+XML;
     }
 
     public function getJSParser()

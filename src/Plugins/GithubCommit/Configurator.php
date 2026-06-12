@@ -44,9 +44,21 @@ class Configurator extends Github
 
     protected function getTemplateContent(): string
     {
-        return '<xsl:value-of select="@repo"/><i class="fas fa-hashtag" aria-hidden="true" /><code><xsl:value-of select="substring(@commit, 1, 7)"/></code>
-        <xsl:if test="string(@comment) and @comment != \'\'"><i class="fas fa-comment" aria-hidden="true" /></xsl:if>
-        <xsl:if test="string(@diff) and @diff != \'\'"> (diff)</xsl:if>';
+        return <<<XML
+{$this->getRepoNameTemplate()}
+<i class="fas fa-hashtag" aria-hidden="true" />
+<code class="github-commit-link--commit">
+    <xsl:value-of select="substring(@commit, 1, 7)"/>
+</code>
+
+<xsl:if test="string(@comment) and @comment != ''">
+    <i class="fas fa-comment" aria-hidden="true" />
+</xsl:if>
+
+<xsl:if test="string(@diff) and @diff != ''">
+    (diff)
+</xsl:if>
+XML;
     }
 
     public function getJSParser()

@@ -1,17 +1,41 @@
 .Github-embed {
   display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
   border: 1px solid var(--control-bg);
   border-radius: var(--border-radius);
-  padding: 2px 6px;
+  padding: 0 4px;
   text-decoration: none;
   color: var(--text-color);
   background-color: var(--control-bg);
   font-size: 0.9em;
-  margin: 0 2px;
+  margin: -2px 2px;
 
-  i.fab.fa-github {
-      margin-right: 4px;
+  i.fab.fa-github, .github-repo-name {
+      flex: 0 0 auto;
+  }
+
+  .github-repo-name {
+      white-space: nowrap;
+      margin: 0 4px;
+  }
+
+  // Only allow the path to break if necessary.
+  // If/when it wraps, it'll start a new line and take up the full width.
+  .github-repo-link--path {
+      flex: 1 1 auto;
+      min-width: 0;
+      word-break: break-all;
+      font-weight: 400;
+  }
+
+  // Used in commit, issue, pr, and compare links
+  code {
+    background-color: var(--code-bg);
+    color: var(--code-color);
+    padding: 2px 4px; // Add a little padding for visual balance
+    border-radius: var(--border-radius);
+    font-size: 0.9em;
   }
 
   // Add general styling for FontAwesome icons used in the links
@@ -34,21 +58,5 @@
   &:active {
       background-color: color-mix(in srgb, var(--control-bg), black 10%);
   }
-}
 
-.github-commit-link, .github-issue-link, .github-pr-link {
-  code {
-      background-color: var(--code-bg);
-      color: var(--code-color);
-      padding: 2px 4px; // Add a little padding for visual balance
-      border-radius: var(--border-radius);
-      font-size: 0.9em;
-  }
-}
-
-.github-repo-link {
-    &--path {
-        font-weight: 400;
-        padding-left: 4px;
-    }
 }
