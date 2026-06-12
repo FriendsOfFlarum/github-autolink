@@ -24,5 +24,6 @@ return [
             $configurator->plugins->set('GithubCommitAutolink', Plugins\GithubCommit\Configurator::class);
             $configurator->plugins->set('GithubRepositoryAutolink', Plugins\GithubRepository\Configurator::class);
             $configurator->plugins->set('GithubCompareAutolink', Plugins\GithubCompare\Configurator::class);
+            $configurator->plugins->set('GithubReleaseAutolink', Plugins\GithubRelease\Configurator::class);
         }),
 ];

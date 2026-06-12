@@ -193,6 +193,23 @@ class FormatterTest extends TestCase
     /**
      * @test
      */
+    public function it_renders_a_release_link()
+    {
+        $link = 'https://github.com/flarum/framework/releases/tag/v1.8.3';
+        $response = $this->postContent("Release: $link");
+
+        $this->assertEquals(201, $response->getStatusCode());
+
+        $post = json_decode($response->getBody()->getContents(), true)['data'];
+
+        $this->assertStringContainsString('Github-embed', $post['attributes']['contentHtml']);
+        $this->assertStringContainsString('github-release-link', $post['attributes']['contentHtml']);
+        $this->assertStringContainsString("href=\"$link\"", $post['attributes']['contentHtml']);
+    }
+
+    /**
+     * @test
+     */
     public function it_renders_all_links_together()
     {
         $content = <<<'EOT'
