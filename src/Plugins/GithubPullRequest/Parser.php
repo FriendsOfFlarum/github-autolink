@@ -28,13 +28,12 @@ class Parser extends ParserBase
             );
 
             $isComment = isset($m[3]) && \strpos($m[3][0], '#') === 0;
-            $isCommit = isset($m[4]) && \strpos($m[4][0], '/commits/') !== false;
 
             $attributes = [
                 'repo'    => $m[1][0],
                 'pr'      => $m[2][0],
                 'comment' => $isComment ? $m[3][0] : '',
-                'commit'  => $isCommit ? \explode('/commits/', $m[4][0])[1] : '',
+                'commit'  => $m[5][0] ?? '',
             ];
 
             $tag->setAttributes($attributes);

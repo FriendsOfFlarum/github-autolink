@@ -107,7 +107,7 @@ class FormatterTest extends TestCase
 
         $this->assertStringContainsString('Github-embed', $post['attributes']['contentHtml']);
         $this->assertStringContainsString('github-pr-link', $post['attributes']['contentHtml']);
-        $this->assertStringContainsString('href="https://github.com/flarum/framework/pull/3877/commits/7a94f011df1a3c3f9f32f72c11b1efa9ca17acd2"', $post['attributes']['contentHtml']);
+        $this->assertStringContainsString('href="https://github.com/flarum/framework/pull/3877/changes/7a94f011df1a3c3f9f32f72c11b1efa9ca17acd2"', $post['attributes']['contentHtml']);
     }
 
     /**
@@ -216,6 +216,7 @@ class FormatterTest extends TestCase
 Here's a PR https://github.com/flarum/framework/pull/3876
 PR Comment: https://github.com/flarum/framework/pull/3872#pullrequestreview-1585769864
 Commit inside a PR: https://github.com/flarum/framework/pull/3877/commits/7a94f011df1a3c3f9f32f72c11b1efa9ca17acd2
+Commit inside a PR (new link): https://github.com/flarum/framework/pull/3877/changes/7a94f011df1a3c3f9f32f72c11b1efa9ca17acd2
 Normal commit: https://github.com/FriendsOfFlarum/default-group/commit/ca783dee209fe126b677ec73a18d1ed4ccc4e76c
 Commit comment: https://github.com/FriendsOfFlarum/default-group/commit/ca783dee209fe126b677ec73a18d1ed4ccc4e76c#commitcomment-129448475
 Issue: https://github.com/flarum/framework/issues/3895
@@ -237,7 +238,9 @@ EOT;
 
         $this->assertStringContainsString('href="https://github.com/flarum/framework/pull/3872#pullrequestreview-1585769864"', $post['attributes']['contentHtml']);
 
-        $this->assertStringContainsString('href="https://github.com/flarum/framework/pull/3877/commits/7a94f011df1a3c3f9f32f72c11b1efa9ca17acd2"', $post['attributes']['contentHtml']);
+        $this->assertStringNotContainsString('href="https://github.com/flarum/framework/pull/3877/commits/7a94f011df1a3c3f9f32f72c11b1efa9ca17acd2"', $post['attributes']['contentHtml']);
+
+        $this->assertStringContainsString('href="https://github.com/flarum/framework/pull/3877/changes/7a94f011df1a3c3f9f32f72c11b1efa9ca17acd2"', $post['attributes']['contentHtml']);
 
         $this->assertStringContainsString('github-commit-link', $post['attributes']['contentHtml']);
         $this->assertStringContainsString('href="https://github.com/FriendsOfFlarum/default-group/commit/ca783dee209fe126b677ec73a18d1ed4ccc4e76c"', $post['attributes']['contentHtml']);
