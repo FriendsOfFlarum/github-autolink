@@ -9,40 +9,39 @@
  * file that was distributed with this source code.
  */
 
-namespace FoF\GitHubAutolink\Plugins\GithubRepository;
+namespace FoF\GitHubAutolink\Plugins\GithubRelease;
 
 use FoF\GitHubAutolink\Plugins\Github;
 use s9e\TextFormatter\Configurator\Items\Tag;
 
 class Configurator extends Github
 {
-    protected $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+)(\/[^\s]*)?)/si';
-    protected $tagName = 'GITHUBREPO';
+    protected $regexp = '/(?:^|\b)(?:https?\:\/\/github\.com\/([\w-]+\/[\w-]+)\/releases\/tag\/([\w\-\.]+))/si';
+    protected $tagName = 'GITHUBRELEASE';
 
     protected function getClassName()
     {
-        return 'github-repo-link';
+        return 'github-release-link';
     }
 
     protected function getSpecificAttributes(Tag $tag)
     {
-        $tag->attributes->add('repopath');
+        $tag->attributes->add('tag');
     }
 
     protected function getTemplateHref()
     {
-        return 'https://github.com/<xsl:value-of select="@repo"/><xsl:value-of select="@repopath"/>';
+        return 'https://github.com/<xsl:value-of select="@repo"/>/releases/tag/<xsl:value-of select="@tag"/>';
     }
 
     protected function getTemplateContent()
     {
         return <<<XML
 {$this->getRepoNameTemplate()}
-<xsl:if test="string(@repopath) and @repopath != ''">
-    <span class="github-repo-link--path">
-        <xsl:value-of select="substring(@repopath, 2)"/>
-    </span>
-</xsl:if>
+<i class="fas fa-tag" aria-hidden="true" />
+<span class="github-release-link--tag">
+    <xsl:value-of select="@tag"/>
+</span>
 XML;
     }
 

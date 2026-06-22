@@ -1,54 +1,61 @@
 .Github-embed {
   display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
   border: 1px solid @control-bg;
   border-radius: @border-radius;
-  padding: 2px 6px;
+  padding: 0 4px;
   text-decoration: none;
   color: @text-color;
   background-color: @control-bg;
   font-size: 0.9em;
-  margin: 0 2px;
+  margin: -2px 2px;
 
-  i.fab.fa-github {
-      margin-right: 4px;
+  i.fab.fa-github, .github-repo-name {
+    flex: 0 0 auto;
+  }
+
+  .github-repo-name {
+    white-space: nowrap;
+    margin: 0 4px;
+  }
+
+  // Only allow the path to break if necessary.
+  // If/when it wraps, it'll start a new line and take up the full width.
+  .github-repo-link--path {
+    flex: 1 1 auto;
+    min-width: 0;
+    word-break: break-all;
+    font-weight: 400;
+  }
+
+  // Used in commit, issue, pr, and compare links
+  code {
+    background-color: var(--code-bg);
+    color: var(--code-color);
+    padding: 2px 4px; // Add a little padding for visual balance
+    border-radius: var(--border-radius);
+    font-size: 0.9em;
   }
 
   // Add general styling for FontAwesome icons used in the links
   i.fas {
-      margin: 0 3px; // Spacing around the icons
-      font-size: 0.85em; // Slightly reduce the size for better visual alignment
+    margin: 0 3px; // Spacing around the icons
+    font-size: 0.85em; // Slightly reduce the size for better visual alignment
   }
 
   i.fas.fa-code-branch,
   i.fas.fa-exclamation-circle,
   i.fas.fa-comment,
   i.fas.fa-hashtag {
-      margin-right: 2px; // Adjust spacing between the repo name and the icons
+    margin-right: 2px; // Adjust spacing between the repo name and the icons
   }
 
   &:hover {
-      background-color: darken(@control-bg, 5%);
+    background-color: darken(@control-bg, 5%);
   }
 
   &:active {
-      background-color: darken(@control-bg, 10%);
+    background-color: darken(@control-bg, 10%);
   }
-}
-
-.github-commit-link, .github-issue-link, .github-pr-link {
-  code {
-      background-color: @code-bg;
-      color: @code-color;
-      padding: 2px 4px; // Add a little padding for visual balance
-      border-radius: @border-radius;
-      font-size: 0.9em;
-  }
-}
-
-.github-repo-link {
-    &--path {
-        font-weight: 400;
-        padding-left: 4px;
-    }
 }

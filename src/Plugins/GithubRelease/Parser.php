@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace FoF\GitHubAutolink\Plugins\GithubPullRequest;
+namespace FoF\GitHubAutolink\Plugins\GithubRelease;
 
 use s9e\TextFormatter\Plugins\ParserBase;
 
@@ -24,19 +24,15 @@ class Parser extends ParserBase
                 $tagName,
                 $m[0][1],
                 \strlen($m[0][0]),
-                -100
+                -10
             );
 
-            $isComment = isset($m[3]) && \strpos($m[3][0], '#') === 0;
-
-            $attributes = [
-                'repo'    => $m[1][0],
-                'pr'      => $m[2][0],
-                'comment' => $isComment ? $m[3][0] : '',
-                'commit'  => $m[5][0] ?? '',
-            ];
-
-            $tag->setAttributes($attributes);
+            $tag->setAttributes(
+                [
+                    'repo'  => $m[1][0],
+                    'tag'   => $m[2][0],
+                ]
+            );
         }
     }
 }
