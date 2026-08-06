@@ -48,10 +48,8 @@ abstract class Github extends ConfiguratorBase
     protected function makeTemplate(): string
     {
         return sprintf(
-            '<a class="Github-embed %1$s">
+            '<a class="Github-embed %1$s" target="_blank" rel="ugc noopener noreferrer">
             <xsl:attribute name="href">%2$s</xsl:attribute>
-            <xsl:attribute name="target">_blank</xsl:attribute>
-            <xsl:attribute name="rel">ugc noopener noreferrer</xsl:attribute>
             <i class="fab fa-github" aria-hidden="true" />
             %3$s
         </a>',
