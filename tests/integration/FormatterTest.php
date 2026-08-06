@@ -66,6 +66,16 @@ class FormatterTest extends TestCase
         );
     }
 
+    /**
+     * Every rendered GitHub link must open in a new tab, with a safe rel.
+     */
+    protected function assertOpensInNewTab(string $html, int $expectedLinks = 1): void
+    {
+        $this->assertSame($expectedLinks, substr_count($html, 'Github-embed'));
+        $this->assertSame($expectedLinks, substr_count($html, 'target="_blank"'));
+        $this->assertSame($expectedLinks, substr_count($html, 'rel="ugc noopener noreferrer"'));
+    }
+
     #[Test]
     public function it_renders_a_github_pr_link()
     {
@@ -76,6 +86,7 @@ class FormatterTest extends TestCase
         $post = json_decode($response->getBody()->getContents(), true)['data'];
 
         $this->assertStringContainsString('Github-embed', $post['attributes']['contentHtml']);
+        $this->assertOpensInNewTab($post['attributes']['contentHtml']);
         $this->assertStringContainsString('github-pr-link', $post['attributes']['contentHtml']);
         $this->assertStringContainsString('href="https://github.com/flarum/framework/pull/3876"', $post['attributes']['contentHtml']);
     }
@@ -90,6 +101,7 @@ class FormatterTest extends TestCase
         $post = json_decode($response->getBody()->getContents(), true)['data'];
 
         $this->assertStringContainsString('Github-embed', $post['attributes']['contentHtml']);
+        $this->assertOpensInNewTab($post['attributes']['contentHtml']);
         $this->assertStringContainsString('github-pr-link', $post['attributes']['contentHtml']);
         $this->assertStringContainsString('href="https://github.com/flarum/framework/pull/3872#pullrequestreview-1585769864"', $post['attributes']['contentHtml']);
     }
@@ -104,6 +116,7 @@ class FormatterTest extends TestCase
         $post = json_decode($response->getBody()->getContents(), true)['data'];
 
         $this->assertStringContainsString('Github-embed', $post['attributes']['contentHtml']);
+        $this->assertOpensInNewTab($post['attributes']['contentHtml']);
         $this->assertStringContainsString('github-pr-link', $post['attributes']['contentHtml']);
         $this->assertStringContainsString('href="https://github.com/flarum/framework/pull/3877/changes/7a94f011df1a3c3f9f32f72c11b1efa9ca17acd2"', $post['attributes']['contentHtml']);
     }
@@ -118,6 +131,7 @@ class FormatterTest extends TestCase
         $post = json_decode($response->getBody()->getContents(), true)['data'];
 
         $this->assertStringContainsString('Github-embed', $post['attributes']['contentHtml']);
+        $this->assertOpensInNewTab($post['attributes']['contentHtml']);
         $this->assertStringContainsString('github-commit-link', $post['attributes']['contentHtml']);
         $this->assertStringContainsString('href="https://github.com/FriendsOfFlarum/default-group/commit/ca783dee209fe126b677ec73a18d1ed4ccc4e76c"', $post['attributes']['contentHtml']);
     }
@@ -132,6 +146,7 @@ class FormatterTest extends TestCase
         $post = json_decode($response->getBody()->getContents(), true)['data'];
 
         $this->assertStringContainsString('Github-embed', $post['attributes']['contentHtml']);
+        $this->assertOpensInNewTab($post['attributes']['contentHtml']);
         $this->assertStringContainsString('github-commit-link', $post['attributes']['contentHtml']);
         $this->assertStringContainsString('href="https://github.com/FriendsOfFlarum/default-group/commit/ca783dee209fe126b677ec73a18d1ed4ccc4e76c#commitcomment-129448475"', $post['attributes']['contentHtml']);
     }
@@ -146,6 +161,7 @@ class FormatterTest extends TestCase
         $post = json_decode($response->getBody()->getContents(), true)['data'];
 
         $this->assertStringContainsString('Github-embed', $post['attributes']['contentHtml']);
+        $this->assertOpensInNewTab($post['attributes']['contentHtml']);
         $this->assertStringContainsString('github-issue-link', $post['attributes']['contentHtml']);
         $this->assertStringContainsString('href="https://github.com/flarum/framework/issues/3895"', $post['attributes']['contentHtml']);
     }
@@ -160,6 +176,7 @@ class FormatterTest extends TestCase
         $post = json_decode($response->getBody()->getContents(), true)['data'];
 
         $this->assertStringContainsString('Github-embed', $post['attributes']['contentHtml']);
+        $this->assertOpensInNewTab($post['attributes']['contentHtml']);
         $this->assertStringContainsString('github-repo-link', $post['attributes']['contentHtml']);
         $this->assertStringContainsString('href="https://github.com/imorland/flarum-ext-twofactor"', $post['attributes']['contentHtml']);
     }
@@ -174,6 +191,7 @@ class FormatterTest extends TestCase
         $post = json_decode($response->getBody()->getContents(), true)['data'];
 
         $this->assertStringContainsString('Github-embed', $post['attributes']['contentHtml']);
+        $this->assertOpensInNewTab($post['attributes']['contentHtml']);
         $this->assertStringContainsString('github-compare-link', $post['attributes']['contentHtml']);
         $this->assertStringContainsString('href="https://github.com/flarum/framework/compare/v1.8.2...v1.8.3"', $post['attributes']['contentHtml']);
     }
@@ -189,6 +207,7 @@ class FormatterTest extends TestCase
         $post = json_decode($response->getBody()->getContents(), true)['data'];
 
         $this->assertStringContainsString('Github-embed', $post['attributes']['contentHtml']);
+        $this->assertOpensInNewTab($post['attributes']['contentHtml']);
         $this->assertStringContainsString('github-release-link', $post['attributes']['contentHtml']);
         $this->assertStringContainsString("href=\"$link\"", $post['attributes']['contentHtml']);
     }
@@ -216,6 +235,7 @@ EOT;
         $post = json_decode($response->getBody()->getContents(), true)['data'];
 
         $this->assertStringContainsString('Github-embed', $post['attributes']['contentHtml']);
+        $this->assertOpensInNewTab($post['attributes']['contentHtml'], 10);
 
         // Assert all the strings for each link type
         $this->assertStringContainsString('github-pr-link', $post['attributes']['contentHtml']);
@@ -258,6 +278,7 @@ EOT;
         // Should render the normal repo link, with the full href supplied in the content
 
         $this->assertStringContainsString('Github-embed', $post['attributes']['contentHtml']);
+        $this->assertOpensInNewTab($post['attributes']['contentHtml']);
         $this->assertStringContainsString('github-repo-link', $post['attributes']['contentHtml']);
         $this->assertStringContainsString('href="'.$url.'"', $post['attributes']['contentHtml']);
     }
